@@ -34,11 +34,11 @@ const MovieListing = () => {
   return (
     <div className="movie-wrapper">
       <div className="movie-list">
-        <h2>🎬 MOVIES</h2>
+        <h2>MOVIES</h2>
         <div className="movie-container">{renderMovies}</div>
       </div>
       <div className="show-list">
-        <h2>🍔 SHOWS</h2>
+        <h2>SHOWS</h2>
         <div className="movie-container">{renderShows}</div>
       </div>
     </div>
