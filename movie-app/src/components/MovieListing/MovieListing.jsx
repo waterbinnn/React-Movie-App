@@ -1,7 +1,14 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
-import { getAllMovies, getAllShows } from '../../features/movies/movieSlice';
+import React, { useEffect } from 'react';
+import Slider from 'react-slick';
+import { useDispatch, useSelector } from 'react-redux';
+import {
+  fetchAsyncMovies,
+  getAllMovies,
+  getAllShows,
+  getTerm,
+} from '../../features/movies/movieSlice';
 import MovieCard from '../MovieCard/MovieCard';
+import { Settings } from '../../common/settings';
 import './MovieListing.scss';
 
 const MovieListing = () => {
@@ -35,11 +42,15 @@ const MovieListing = () => {
     <div className="movie-wrapper">
       <div className="movie-list">
         <h2>MOVIES</h2>
-        <div className="movie-container">{renderMovies}</div>
+        <div className="movie-container">
+          <Slider {...Settings}>{renderMovies}</Slider>
+        </div>
       </div>
       <div className="show-list">
         <h2>SHOWS</h2>
-        <div className="movie-container">{renderShows}</div>
+        <div className="movie-container">
+          <Slider {...Settings}>{renderShows}</Slider>
+        </div>
       </div>
     </div>
   );
