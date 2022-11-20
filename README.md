@@ -6,8 +6,10 @@ Description : <br>
 - React Redux ToolKit 연습, 공부용 프로젝트
 
 <br>
-## Note
-install
+
+## 📝 Note
+
+### Install
 
 ````
 npm install redux react-redux @reduxjs/toolkit
@@ -16,7 +18,7 @@ npm install react-router-dom
 npm install sass --save
 npm install react-slick //for carousel
 ````
-## TODO 
+### TODO 
 
 영화 API 받아와서 화면에 그려주기 ✅ <br>
 Redux toolkit, createSlice, <br>createAsyncThunk 사용하여 state 관리 ✅ <br>
