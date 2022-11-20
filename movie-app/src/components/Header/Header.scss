@@ -20,3 +20,57 @@
   width: 38px;
   height: 38px;
 }
+
+.search-bar {
+  width: 50%;
+  display: flex;
+  justify-content: center;
+
+  form {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    width: 70%;
+
+    button {
+      position: absolute;
+      right: 10px;
+      padding: 0 8px;
+      margin: 5px 0 0 5px;
+      border: none;
+      font-size: 18px;
+      height: 30px;
+      color: $font-detail;
+      background-color: transparent;
+      transition: all 0.2s ease-in;
+      cursor: pointer;
+
+      &:hover {
+        opacity: 0.5;
+      }
+    }
+
+    input {
+      font-size: 18px;
+      width: 100%;
+      padding: 5px 50px 5px 13px;
+      height: 40px;
+      background-color: transparent;
+      border: 1px solid $font-detail;
+      border-radius: 30px;
+      outline: none;
+      color: $font-primary;
+      transition: all 0.2s ease-in;
+
+      &::placeholder {
+        font-size: 14px;
+      }
+
+      &:hover,
+      &:active,
+      &:focus {
+        opacity: 0.7;
+      }
+    }
+  }
+}
