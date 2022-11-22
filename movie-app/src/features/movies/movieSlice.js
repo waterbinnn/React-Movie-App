@@ -35,6 +35,8 @@ const initialState = {
   shows: {},
   selectMovieOrShow: {},
   term: '',
+  searching: 'loading',
+  main: false,
 };
 
 const movieSlice = createSlice({
@@ -44,8 +46,18 @@ const movieSlice = createSlice({
     removeSelectedMovieOrShow: (state) => {
       state.selectMovieOrShow = {};
     },
+    removeMovieOrShow: (state) => {
+      state.movies = {};
+      state.shows = {};
+    },
     searchTerm: (state, action) => {
       state.term = action.payload;
+    },
+    removeSearchTerm: (state) => {
+      state.term = '';
+    },
+    setMain: (state) => {
+      state.main = false;
     },
   },
   extraReducers: {
@@ -70,7 +82,13 @@ const movieSlice = createSlice({
   },
 });
 
-export const { removeSelectedMovieOrShow, searchTerm } = movieSlice.actions;
+export const {
+  removeSelectedMovieOrShow,
+  removeMovieOrShow,
+  searchTerm,
+  removeSearchTerm,
+  setMain,
+} = movieSlice.actions;
 export const getAllMovies = (state) => state.movies.movies;
 export const getAllShows = (state) => state.movies.shows;
 export const getSelectedMovieOrShow = (state) => state.movies.selectMovieOrShow;
