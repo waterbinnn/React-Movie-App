@@ -11,3 +11,31 @@
     font-weight: 700;
   }
 }
+
+.movies-error,
+.shows-error {
+  h3 {
+    color: rgb(217, 218, 196);
+    font-size: 13px;
+    font-weight: 400;
+  }
+}
+.slick-slide.slick-active.slick-cloned {
+  display: none;
+}
+
+.wrapper-search-text {
+  margin: 20px 0;
+  font-size: 18px;
+
+  .search {
+    &-text {
+      color: $font-detail;
+      font-weight: 300;
+    }
+    &-result {
+      color: $font-primary;
+      font-weight: 400;
+    }
+  }
+}
