@@ -1,39 +1,44 @@
 import React from 'react';
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 import {
   fetchAsyncMovies,
   fetchAsyncShows,
+  searchTerm,
 } from '../../features/movies/movieSlice';
 import user from '../../images/user.png';
 import './Header.scss';
-import { getTerm } from '../../features/movies/movieSlice';
 
 const Header = () => {
-  const [term, setTerm] = useState(getTerm);
   const dispatch = useDispatch();
+
+  const term = useSelector((state) => state.payload);
 
   const submitHandler = (e) => {
     e.preventDefault();
-    if (term === '') return alert('Please enter search term');
-    dispatch(fetchAsyncMovies(term));
-    dispatch(fetchAsyncShows(term));
-    setTerm('');
+    let val = e.target[0].value;
+    if (val === '') return alert('Please enter search term');
+    dispatch(fetchAsyncMovies(val));
+    dispatch(fetchAsyncShows(val));
+  };
+
+  const handleChange = (e) => {
+    dispatch(searchTerm(e.target.value));
   };
 
   return (
     <div className="header">
-      <div className="logo">
-        <Link to="/">FIND MOVIE APP</Link>
-      </div>
+      <Link to="/">
+        <div className="logo">FIND MOVIE APP</div>
+      </Link>
       <div className="search-bar">
         <form onSubmit={submitHandler}>
           <input
             type="text"
             value={term}
             placeholder="Search Movies or Shows"
-            onChange={(e) => setTerm(e.target.value)}
+            onChange={handleChange}
           />
           <button type="submit">
             <i className="fa fa-search"></i>
