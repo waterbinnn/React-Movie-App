@@ -56,6 +56,14 @@ const MovieListing = () => {
 
   return (
     <div className="movie-wrapper">
+      {text.length !== 0 ? (
+        <div className="wrapper-search-text">
+          <p className="search-text">
+            search for
+            <strong className="search-result"> {text}</strong>
+          </p>
+        </div>
+      ) : null}
       <>
         <div className="movie-list">
           <h2>MOVIES</h2>
