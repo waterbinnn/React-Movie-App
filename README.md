@@ -26,7 +26,7 @@ Redux toolkit, createSlice, <br>createAsyncThunk 사용하여 state 관리 ✅ <
 검색 기능 구현 ✅ <br>
 Carousel ✅ <br>
 검색 결과 없을 때 화면 구현 ✅ <br>
-어떤 제목으로 검색했는지 화면에 그려주기 <br> 
+어떤 제목으로 검색했는지 화면에 그려주기 ✅<br> 
 이미지 예외처리 ✅ 
 
 ## Trouble Shooting
@@ -56,6 +56,28 @@ input에 입력할 때 마다 렌더링이 되어서 input창에 치는게
         </div>
       ) : null} 
 ````
+
+
+[해결]
+term 이 아닌 location으로 받아온 text로 해결 
+(2번 문제의 해결법 활용한거라 코드도 길어지지 않아 만족..)
+```jsx
+ const location = useLocation();
+//  http://localhost:3000/search?term=lala
+ const text = location.search.slice(6);
+
+  {text.length !== 0 ? (
+        <div className="wrapper-search-text">
+          <p className="search-text">
+            search for
+            <strong className="search-result"> {text}</strong>
+          </p>
+        </div>
+      ) : null}
+ ```
+
+ <img width="500" alt="Screenshot 2022-11-23 at 4 44 06 PM" src="https://user-images.githubusercontent.com/96714788/203494371-14448c0b-570b-42a6-98a5-9a58b1855906.png">
+
 ### 2. Detail 페이지에서 검색했을 때 검색결과 화면 보여지지 않는 문제 
 예상 문제 원인 : 메인 페이지로 이동을 해줘야 할 것 같은데 메인 페이지에는 harry, freinds가 default 이다
 
