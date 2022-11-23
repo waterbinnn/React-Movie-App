@@ -19,3 +19,11 @@ body {
 .container {
   margin: 0 40px;
 }
+
+.card-image {
+  display: block;
+  background-image: url('./images/noImage.png');
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 250px auto;
+}

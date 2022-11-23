@@ -65,7 +65,7 @@ const MovieDetail = () => {
             </div>
           </div>
           <div className="section-right">
-            <img src={data.Poster} alt={data.Title} />
+            <img className="card-image" src={data.Poster} alt={data.Title} />
           </div>
         </>
       )}
