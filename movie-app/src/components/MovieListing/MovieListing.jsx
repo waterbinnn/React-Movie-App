@@ -1,10 +1,13 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 import Slider from 'react-slick';
 import { useSelector, useDispatch } from 'react-redux';
 import {
   getAllMovies,
   getAllShows,
   removeMovieOrShow,
+  fetchAsyncMovies,
+  fetchAsyncShows,
 } from '../../features/movies/movieSlice';
 import MovieCard from '../MovieCard/MovieCard';
 import { Settings } from '../../common/settings';
@@ -13,10 +16,11 @@ import './MovieListing.scss';
 const MovieListing = () => {
   const movies = useSelector(getAllMovies);
   const shows = useSelector(getAllShows);
+  const location = useLocation();
+
+  const text = location.search.slice(6);
 
   const dispatch = useDispatch();
-
-  const term = useSelector((state) => state.movies.term);
 
   let renderMovies,
     renderShows = '';
@@ -42,10 +46,13 @@ const MovieListing = () => {
     );
 
   useEffect(() => {
+    dispatch(fetchAsyncMovies(text));
+    dispatch(fetchAsyncShows(text));
+
     return () => {
       dispatch(removeMovieOrShow());
     };
-  }, []);
+  }, [dispatch, text]);
 
   return (
     <div className="movie-wrapper">
