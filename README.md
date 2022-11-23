@@ -14,6 +14,7 @@ Description : <br>
 ````
 npm install redux react-redux @reduxjs/toolkit
 npm install axios
+npm install redux-persist
 npm install react-router-dom
 npm install sass --save
 npm install react-slick //for carousel
@@ -26,7 +27,7 @@ Redux toolkit, createSlice, <br>createAsyncThunk 사용하여 state 관리 ✅ <
 Carousel ✅ <br>
 검색 결과 없을 때 화면 구현 ✅ <br>
 어떤 제목으로 검색했는지 화면에 그려주기 <br> 
-이미지 예외처리 
+이미지 예외처리 ✅ 
 
 ## Trouble Shooting
 
@@ -60,6 +61,7 @@ input에 입력할 때 마다 렌더링이 되어서 input창에 치는게
 
 [시도]
 디폴트로 있는 값을 제거, 검색창 submit 할 떼 `navigate('/)` 해줌으로써 문제는 해결해보려 하였으나 디폴트값을 없애주면 메인 페이지에는 아무 정보도 뜨지 않는 문제 + 이전 검색 결과 남아있다가 리패칭 되는 문제 발생
+-> 페이지 뒤로가기 했을 때 결과값이 남아있지 않는 문제 발생 
 
 [해결]
 - 디폴트값을 없애주면 메인 페이지에는 아무 정보도 뜨지 않는 문제
@@ -76,5 +78,31 @@ removeMovieOrShow: (state) => {
 추가생성하여 
 movieListing.jsx 에서 useEffect로 `dispatch(removeMovieOrShow());` 해주어 기존 정보 없어지게끔 구현하여 해결
 
+찾아보니 검색, 필터 같은 경우는 param이 아닌, queryString으로 url을 구성한다.  
+MovieListing 을 보여주는 라우트 path 는 `path="/search"` 로 수정하였고, 헤더에서 input을 submit 할 때 `navigate(`/search?term=${term}`);` 해주었다. 
+navigate를 파라미터 방식으로 했을때와 동작은 같지만 쿼리스트링은 useLocation Hook 으로 원하는 값을 필터링 하며 GET해올 수 있기 때문에 더 적합한듯.. 
+
+이렇게 생성한 쿼리 스트링을 이용하여 
+MovieListing.jsx 에서 
+```jsx
+ const location = useLocation();
+//  http://localhost:3000/search?term=lala
+ const text = location.search.slice(6);
+ //lala -> 검색한 값만 받아오게 만들고 이 텍스트를 패치할 수 있게 구현하였다. 
+  useEffect(() => {
+    dispatch(fetchAsyncMovies(text));
+    dispatch(fetchAsyncShows(text));
+
+    return () => {
+      dispatch(removeMovieOrShow());
+    };
+  }, [dispatch, text]);
+
+``` 
+이렇게 해줌으로써 해결한 것 
+1. 디테일 페이지에서 검색했을 때도 정상출력
+2. 여러번 검색한 후 뒤로가기 버튼을 눌러도 정상출력
+
+<img src="https://user-images.githubusercontent.com/96714788/203491789-8022856a-b816-4d99-9385-800476f4565a.gif">
 
 
